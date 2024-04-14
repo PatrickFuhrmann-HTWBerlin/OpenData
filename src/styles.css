@@ -1,0 +1,9 @@
+/* public/styles.css */
+#output {
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
