@@ -77,6 +77,41 @@ async function queryDatabase(req, res){
   }
 }
 
+// Endpoint to add an entry
+app.post('/api/people', async (req, res) => {
+    const { name, givenName, birthday } = req.body;
+    try {
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+        const result = await collection.insertOne({ name, givenName, birthday });
+        console.log(result)
+        res.status(201).json(result.insertedId);
+    } catch (error) {
+        console.error('Failed to insert data:', error);
+        res.status(500).send('Error inserting data');
+    }
+});
+
+// Endpoint to search for entries
+app.get('/api/people', async (req, res) => {
+    const query = req.query;
+    try {
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+        console.log(query)
+        const people = await collection.find(query).toArray();
+        console.log(people)
+        if (people.length > 0) {
+            res.json(people);
+        } else {
+            res.status(404).send('No matching documents found');
+        }
+    } catch (error) {
+        console.error('Failed to retrieve data:', error);
+        res.status(500).send('Error retrieving data');
+    }
+});
+
 app.post('/toupper', addEntryToField )
 app.get('/api/db', queryDatabase );
 
