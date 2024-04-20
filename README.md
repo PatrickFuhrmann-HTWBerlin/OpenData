@@ -13,7 +13,7 @@
 
 - If the next is set, all the above will be ignored:
  |  Parameter | Default Value |
- +------------+---------------+
+  |:------------|:---------------|
   | OD_CONFIG_MONGODB_SERVER   | 'mongodb-server' |
   | OD_CONFIG_MONGODB_PORT   | 'mongodb-server' |
   | OD_CONFIG_MONGODB_ADMINUSERNAME   | 'mongodb-server' |
