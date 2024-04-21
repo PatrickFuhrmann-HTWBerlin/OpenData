@@ -67,16 +67,17 @@ function printRequest( req ){
    console.log( "----------------------------------------");
 }
 function isValidDate(dateStr) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-      return false;
-  }
+// ----------------------------------
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+        return false;
+    }
   
-  const date = new Date(dateStr);
-  const timestamp = date.getTime();
+    const date = new Date(dateStr);
+    const timestamp = date.getTime();
 
-  if (typeof timestamp !== 'number' || Number.isNaN(timestamp)) {
-      return false;
-  }
+    if (typeof timestamp !== 'number' || Number.isNaN(timestamp)) {
+        return false;
+    }
 
   return date;
 }
@@ -101,30 +102,31 @@ async function testRequest(req, res){
 //
 async function addPerson(req, res){
 // ----------------------------------
-let { name, givenName, birthday } = req.body;
+    let { name, givenName, birthday } = req.body;
     try {
         const db         = client.db(mongodb_db);
         const collection = db.collection(mongodb_collection);
 
         printRequest(req);
+
         console.log("New Entry Request: ","Name=",name,";givenName=",givenName,";birthday=",birthday);
 
         birthday = isValidDate(birthday) ;
         if( ! birthday  ){
           console.log("Is not a valid date : ",birthday);
-          res.status(500).send("Is not a valid date!");
+          res.status(409).send("Is not a valid date!");
           return;
         }
 
         qry = { name , givenName , birthday } 
 
-        console.log("Query: ",qry);
+        console.log("Insert Reqeuest for: ",qry);
 
         const personFound = await collection.findOne( qry );
 
         if( personFound != null ){
           console.log("Person already exists!")
-          res.status(500).send("Entry already exists!");
+          res.status(409).json( { "error": "Account already exists!"  } );
           return;
         }
         
@@ -133,10 +135,14 @@ let { name, givenName, birthday } = req.body;
         const result  = await collection.insertOne( qry );
 
         console.log(result)
-        res.status(201).json(result.insertedId);
+        //
+        // Return 201 : Resourse Created.
+        //
+        console.log("Resource created")
+        res.status(201).json(result);
     } catch (error) {
         console.error('Failed to insert data:', error);
-        res.status(500).send('Error inserting data');
+        res.status(409).json( { "error": "Error inserting data"} );
     }
 }
 //
