@@ -13,7 +13,6 @@ docker run -d \
        --env MONGO_INITDB_ROOT_PASSWORD=rosi \
        --volume  ${DB_DIRECTORY}:/data/db \
        --network open-data-network \
-       --publish 27019:27017 \
        mongo
 #
 #   NOT NEEDED
