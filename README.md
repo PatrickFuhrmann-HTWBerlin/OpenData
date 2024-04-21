@@ -1,9 +1,9 @@
 # Open Data Project
 
 ## API Server
-## Environment
+### Environment
 
-### Configuring access to mongo db server:
+#### Configuring access to mongo db server:
 
 Parameter  | Default Value
 :------------|:---------------
@@ -20,9 +20,11 @@ OD_CONFIG_MONGODB_COLLECTION_NAME | 'people'
  Parameter | Default Value | Syntax
 :------------|:--------------- |:--------
 OD_CONFIG_MONGODB_URI   | '' | mongodb://[USERNAMAE:PASSWORD@]HOSTNAME:PORT
- 
-### Configuring API web service:
 
+## Web Server
+### Environment
+
+#### Configuring API web service:
 Parameter | Default Value 
 :------------|:---------------
 OD_CONFIG_PORT         | 3000 
