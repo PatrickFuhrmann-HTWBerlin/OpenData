@@ -2,6 +2,8 @@
 
 // public/script.js
 
+const BASE_URI = "/forward/api/people"
+
 const msgfield = document.getElementById('message') ;
 
 // create the header of the tabl
@@ -39,17 +41,21 @@ function addPersonEvent( event ) {
     const givenName = document.getElementById('add.givenName').value;
     const birthday  = document.getElementById('add.birthday').value;
 
-    console.log("Elements found : ",name,givenName);
+    const account_details = JSON.stringify( { name, givenName, birthday } ) 
 
-    fetch("http://localhost:3000/api/people" ,
+    console.log( "Account to be inserted : ", account_details )
+
+    fetch( BASE_URI , 
           {
             method:  'POST', 
             headers: { 'Content-Type': 'application/json' } ,
-            body:    JSON.stringify( { name, givenName, birthday } )
+            body:    account_details 
           } ,
     )
     .then(response => {
-      return response.json()
+       ret = response.json()
+       console.log("Response : "+ret)
+       return ret 
     } )
     .then(data => {
         setMessage(JSON.stringify(data));
@@ -122,9 +128,9 @@ function searchPersonEvent(event) {
     
     URLstring=""
     if( query == '' ){
-      URLstring=`http://localhost:3000/api/people`
+      URLstring=BASE_URI
     }else{
-      URLstring=`http://localhost:3000/api/people?${query}`
+      URLstring=`${BASE_URI}?${query}`
     }
     console.log(URLstring)
     fetch(URLstring)
@@ -152,7 +158,7 @@ function removePersonEvent(event) {
   console.log(query)
   // console.log(encodedURI)
   
-  URLstring=`http://localhost:3000/api/people?${query}`
+  URLstring=`${BASE_URI}?${query}`
   
   console.log(URLstring)
   fetch(   URLstring, 
