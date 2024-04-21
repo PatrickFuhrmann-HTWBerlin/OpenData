@@ -1,102 +1,177 @@
 // public/script.js
 
-async function addAndConvertText() {
-
-  var input        = document.getElementById('inputText');
-  var inputToUpper = document.getElementById('inputTextToUpper');
-  var output       = document.getElementById('output');
-
-  if (inputToUpper.value.trim() !== '') {
-    try {
- //     const response = await fetch('/toupper', {
-        const response = await fetch('http://localhost:3000/toupper', {
-          method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: inputToUpper.value })
-      });
-      const data = await response.json();
-      if (response.ok) {
-        output.value += data.result + '\n';
-        inputToUpper.value = ''; // Clear the input field after adding
-      } else {
-        console.error('Error from server:', data);
-      }
-    } catch (error) {
-      console.error('Failed to convert text:', error);
-    }
-  }
-
-  if (input.value.trim() !== '') {
-    output.value += input.value + '\n';
-    input.value = ''; // Clear the input field after adding
-  }
-}
 // public/script.js
 
-function addPersonEvent(event) {
+const msgfield = document.getElementById('message') ;
+
+// create the header of the tabl
+const table = document.getElementById('data-table');
+
+/*
+    // Optionally, recreate the header if needed
+    const header = table.createTHead();
+    const row = header.insertRow(0);
+    let cell;
+
+    // Assuming we know the headers or they are passed in some way
+    const headers = ['given Name', 'Name', 'Birthday']; 
+    headers.forEach(headerText => {
+        cell = row.insertCell();
+        cell.textContent = headerText;
+    });
+*/
+
+
+function setMessage(msg){
+    msgfield.innerHTML = msg ;
+}
+function clearMessage(){
+  setMessage("")
+} 
+
+function addPersonEvent( event ) {
 
     event.preventDefault();
 
-    const name      = document.getElementById('name').value;
-    const givenName = document.getElementById('givenName').value;
-    const birthday  = document.getElementById('birthday').value;
+    clearMessage() ;
+
+    const name      = document.getElementById('add.name').value;
+    const givenName = document.getElementById('add.givenName').value;
+    const birthday  = document.getElementById('add.birthday').value;
 
     console.log("Elements found : ",name,givenName);
 
     fetch("http://localhost:3000/api/people" ,
-        {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, givenName, birthday }),
-    })
-    .then(response => response.json())
+          {
+            method:  'POST', 
+            headers: { 'Content-Type': 'application/json' } ,
+            body:    JSON.stringify( { name, givenName, birthday } )
+          } ,
+    )
+    .then(response => {
+      return response.json()
+    } )
     .then(data => {
-        alert('Person added successfully!');
+        setMessage(JSON.stringify(data));
         console.log(data);
     })
     .catch(error => {
         console.error('Error adding person:', error);
-        alert('Failed to add a person.'+error);
+        setMessage('Failed to add a person.'+error);
     });
 
 }
 
+function renderList(data){
 
+  const results = document.getElementById('results');
+  results.innerHTML = '';  // Clear previous results
+  data.forEach(person => {
+      const li = document.createElement('li');
+      li.textContent = `Name: ${person.givenName} ${person.name}, Birthday: ${person.birthday}`;
+      results.appendChild(li);
+  });
+}
+function clearTable( ){
+    const table = document.getElementById('data-table');
+    let rowCount = table.rows.length;
+
+    // Start at 1 to skip the header row
+    for (let i = rowCount - 1; i > 0; i--) {
+        table.deleteRow(i);
+    }   
+}
+function renderTable(data){
+
+  const results = document.getElementById('data-table');
+  
+  clearTable()
+
+  data.forEach(person => {
+      const tr = document.createElement('tr');
+      var td = document.createElement('td') ;
+      td.textContent = person.givenName ;
+      tr.appendChild(td);      
+      td = document.createElement('td') ;
+      td.textContent = person.name ;
+      tr.appendChild(td);      
+      td = document.createElement('td') ;
+      td.textContent = person.birthday.substring(0,10) ; ;
+      tr.appendChild(td);
+      results.appendChild(tr);
+  });
+}
 function searchPersonEvent(event) {
     event.preventDefault();
-    const query = document.getElementById('searchQuery').value;
 
-    encodedURI = encodeURIComponent(query)
-    console.log(encodedURI)
+    clearTable()
+
+    const name      = document.getElementById('search.name').value;
+    const givenName = document.getElementById('search.givenName').value;
+    const birthday  = document.getElementById('search.birthday').value;
+
+    var query = ""
+    if( name != "" )query = "name="+name + "&"
+    if( givenName != '' )query = query + "givenName="+givenName + "&"
+    if( birthday != '' )query = query + "birthday="+birthday
+
+    // encodedURI = encodeURIComponent(query)
+
+    // console.log(query)
+    // console.log(encodedURI)
+    
     URLstring=""
-    if( encodedURI == '' ){
+    if( query == '' ){
       URLstring=`http://localhost:3000/api/people`
     }else{
-      URLstring=`http://localhost:3000/api/people?name=${encodedURI}`
+      URLstring=`http://localhost:3000/api/people?${query}`
     }
     console.log(URLstring)
     fetch(URLstring)
     .then(response => response.json())
-    .then(data => {
-        const results = document.getElementById('results');
-        results.innerHTML = '';  // Clear previous results
-        data.forEach(person => {
-            const li = document.createElement('li');
-            li.textContent = `Name: ${person.givenName} ${person.name}, Birthday: ${person.birthday}`;
-            results.appendChild(li);
-        });
-    })
+    .then( data => renderTable(data) )
     .catch(error => {
-        console.error('Error searching for people:');
+        console.error('Error searching for people:',error);
 //        alert('Failed to search for people.');
     });
 }
+function removePersonEvent(event) {
+  event.preventDefault();
 
+  const name      = document.getElementById('remove.name').value;
+  const givenName = document.getElementById('remove.givenName').value;
+  const birthday  = document.getElementById('remove.birthday').value;
+
+  var query = ""
+  if( name != "" )query = "name="+name + "&"
+  if( givenName != '' )query = query + "givenName="+givenName + "&"
+  if( birthday != '' )query = query + "birthday="+birthday
+
+  // encodedURI = encodeURIComponent(query)
+
+  console.log(query)
+  // console.log(encodedURI)
+  
+  URLstring=`http://localhost:3000/api/people?${query}`
+  
+  console.log(URLstring)
+  fetch(   URLstring, 
+           { method:  'DELETE' }
+       )
+  .then(response => {
+            return response.json() 
+         }
+       )
+  .then( 
+         data => setMessage(JSON.stringify(data))
+       )
+  .catch(error => {
+      console.error('Error searching for people:',error);
+//        alert('Failed to search for people.');
+  });
+}
 document.getElementById('addPersonForm').addEventListener('submit', addPersonEvent );
-
 document.getElementById('searchPeopleForm').addEventListener('submit', searchPersonEvent ) ;
+document.getElementById('removePersonForm').addEventListener('submit', removePersonEvent ) ;
+
 

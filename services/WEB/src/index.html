@@ -1,35 +1,61 @@
-<!-- public/index.html -->
-<html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ihre Webseite</title>
+    <link rel="stylesheet" href="styles-new.css">
 </head>
 <body>
-  <input type="text" id="inputText" placeholder="Enter some text" />
-  <input type="text" id="inputTextToUpper" placeholder="Enter text to convert to UPPER" />
-  <button onclick="addAndConvertText()">Add and Convert Text</button>
-  <textarea id="output" readonly></textarea>
-
-  <h1>Add a Person</h1>
-  <form id="addPersonForm">
-        <input type="text" id="name" placeholder="Last Name" required>
-        <input type="text" id="givenName" placeholder="Given Name" required>
-        <input type="date" id="birthday" placeholder="Birthday" required>
-        <button type="submit">Add Person</button>
-  </form>
-
-  <h1>Search People</h1>
-  <form id="searchPeopleForm">
-        <input type="text" id="searchQuery" placeholder="Search by Last Name">
-        <button type="submit">Search</button>
-  </form>
-
-  <h2>Results:</h2>
-  <ul id="results"></ul>
-
-
-  <script src="script.js"></script>
+    <div class="container">
+        <h1>Accounts</h1>
+        <div id="message" class="output-box">
+            Messages
+        </div>
+        
+        <div class="input-boxes">
+            <form id="addPersonForm" class="box">
+                <h2>Add an Account</h2>
+                <input type="text" id="add.givenName" placeholder="Given Name" required>
+                <input type="text" id="add.name" placeholder="Name" required>
+                <input type="date" id="add.birthday" placeholder="Birthday" required>
+                <button type="submit">Add Account</button>
+            </form>
+            <form id="removePersonForm" class="box">
+                <h2>Remove an Account</h2>
+                <input type="text" id="remove.givenName" placeholder="Given Name" required>
+                <input type="text" id="remove.name" placeholder="Name" required>
+                <input type="date" id="remove.birthday"  placeholder="Birthday" required>
+                <button type="submit">Remove Account</button>
+            </form>
+            <form id="searchPeopleForm" class="box">
+                <h2>Find Accounts</h2>
+                <input type="text" id="search.givenName" placeholder="Given Name">
+                <input type="text" id="search.name" placeholder="Name">
+                <input type="date" id="search.birthday"  placeholder="Birthday"> 
+                <button type="submit">Find</button>
+            </form>
+        </div>
+        
+        <div class="full-width-box">
+            <h2>Daten Tabelle</h2>
+            <ul id="results">
+                <!-- Die Tabelle wird später mit JavaScript gefüllt -->
+            </ul>
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>Given Name</th>
+                        <th>Name</th>
+                        <th>Birthday</th>
+                    </tr>
+                </thead>
+            
+                <!-- Die Tabelle wird später mit JavaScript gefüllt -->
+            </table>
+        </div>
+    </div>
+<script src="script.js"></script>
 </body>
 </html>
+

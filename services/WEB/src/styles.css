@@ -1,9 +1,105 @@
-/* public/styles.css */
-#output {
-  width: 90%;
-  height: 300px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  box-sizing: border-box;
-  margin-top: 20px;
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.output-box {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+.input-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.box {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f8f8;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.box h2 {
+    margin: 0 0 10px 0;
+}
+
+.box input {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.full-width-box {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.full-width-box h2 {
+    margin-top: 0;
+}
+
+.full-width-box {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f1f1f1; /* Light gray background for the container */
+}
+
+.full-width-box h2 {
+    margin-top: 0;
+}
+
+#data-table {
+    width: 100%; /* Ensures the table spans the entire width of its container */
+    border-collapse: collapse; /* Collapses border to make it more compact and neat */
+    background-color: #ffffff; /* Background color for the table, white here */
+}
+
+#data-table th, #data-table td {
+    border: 1px solid #ddd; /* Light gray border for each cell */
+    padding: 8px; /* Padding inside each cell */
+    text-align: left; /* Align text to the left within cells */
+}
+
+#data-table tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Zebra striping for rows, light gray */
+}
+
+#data-table tr:nth-child(even) {
+    background-color: #ffffff; /* Alternate rows are white */
+}
+
+#data-table th {
+    background-color: #4CAF50; /* Darker background for headers */
+    color: white; /* White text for headers */
+    padding: 10px; /* Slightly more padding for headers */
 }
