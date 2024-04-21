@@ -110,6 +110,7 @@ function renderTable(data){
 function searchPersonEvent(event) {
     event.preventDefault();
 
+    clearMessage() ;
     clearTable()
 
     const name      = document.getElementById('search.name').value;
