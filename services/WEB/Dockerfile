@@ -12,7 +12,7 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY ./src/web-server.js ./web-server.js
+COPY ./src/web-server.js .
 COPY ./src/index.html .
 COPY ./src/styles.css .
 COPY ./src/script.js .
