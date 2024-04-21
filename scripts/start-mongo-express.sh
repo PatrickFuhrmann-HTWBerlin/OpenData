@@ -2,7 +2,7 @@
 #
 docker run -d \
        --name mongo-view \
-       --publish 8081:8081 \
+       --publish 7001:8081 \
        --env ME_CONFIG_BASICAUTH_USERNAME=view \
        --env ME_CONFIG_BASICAUTH_PASSWORD=view \
        --env ME_CONFIG_MONGODB_SERVER=mongodb-server \
