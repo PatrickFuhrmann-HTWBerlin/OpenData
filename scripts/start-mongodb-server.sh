@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+docker network create open-data-network 2>/dev/null
+#
 export DB_DIRECTORY=${HOME}/mongodb
 mkdir -p ${DB_DIRECTORY}
 if [ $? -ne 0 ] ; then
