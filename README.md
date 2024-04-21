@@ -27,7 +27,9 @@ OD_CONFIG_MONGODB_URI   | '' | mongodb://[USERNAMAE:PASSWORD@]HOSTNAME:PORT
 #### Configuring API web service:
 Parameter | Default Value 
 :------------|:---------------
-OD_CONFIG_PORT         | 3000 
+OD_API_SERVER_HOST | api-server
+OD_API_SERVER_PORT | 3000
+OD_CONFIG_PORT         | 8300 
 OD_CONFIG_SITE_BASEURL | '/' 
 
 
