@@ -32,5 +32,28 @@ OD_API_SERVER_PORT | 3000
 OD_CONFIG_PORT         | 8300 
 OD_CONFIG_SITE_BASEURL | '/' 
 
+## Examples
+
+```
+cd scicat
+git clone https://github.com/PatrickFuhrmann-HTWBerlin/OpenData.git
+cd OpenData/services/API
+docker build -t api-server .
+cd ../WEB/
+docker build -t web-server .
+cd ../..
+cd scripts/
+./start-mongodb-server.sh 
+docker network ls
+docker ps
+./start-mongo-express.sh 
+docker ps
+./start-api-server.sh 
+./start-web-server.sh 
+export OD_API_HOST=localhost
+export OD_API_PORT=7003
+./test-api-server.sh 
+```
+
 
 
