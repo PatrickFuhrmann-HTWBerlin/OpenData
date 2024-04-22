@@ -8,7 +8,7 @@
 Parameter  | Default Value
 :------------|:---------------
 OD_CONFIG_MONGODB_SERVER          | 'mongodb-server' 
-OD_CONFIG_MONGODB_PORT            | '3000' 
+OD_CONFIG_MONGODB_PORT            | '27017' 
 OD_CONFIG_MONGODB_ADMINUSERNAME   | 'trude' 
 OD_CONFIG_MONGODB_ADMINPASSWORD   | 'rosi' 
 OD_CONFIG_MONGODB_DB_NAME         | 'opendata' 
@@ -28,8 +28,8 @@ OD_CONFIG_MONGODB_URI   | '' | mongodb://[USERNAMAE:PASSWORD@]HOSTNAME:PORT
 Parameter | Default Value 
 :------------|:---------------
 OD_API_SERVER_HOST | api-server
-OD_API_SERVER_PORT | 3000
-OD_CONFIG_PORT     | 8300 
+OD_API_SERVER_PORT | 7003
+OD_CONFIG_PORT     | 7002 
 OD_CONFIG_SITE_BASEURL | '/' 
 
 ## Examples
@@ -39,9 +39,9 @@ OD_CONFIG_SITE_BASEURL | '/'
 The following example is using a particular set of 'ports' to the outside.
 Port | Default Value 
 :------------|:---------------
-Mongo DB Viewer (Expess) | 
-API ports        | 3000
-Web Ports        | 8300 
+Mongo DB Viewer (Expess) |  7001
+API ports        | 7003
+Web Ports        | 7002 
 
 This is because only port range 7000 - 7020 is opened to the outside 
 from our VM's at the Juelich Supercomputer Center.
