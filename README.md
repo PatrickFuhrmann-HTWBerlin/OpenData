@@ -1,4 +1,8 @@
 # Open Data Project
+## Design Sketch
+
+![The Open Data Design](assets/open-data-design.png)
+
 
 ## API Server
 ### Environment
