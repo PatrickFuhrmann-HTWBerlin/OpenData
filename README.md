@@ -5,7 +5,7 @@
 
 ## Directory Layout
 
-#### services
+### services
 The services for which we provide the javascript (node.js) code
 - API
   - Dockerfile
@@ -18,13 +18,15 @@ The services for which we provide the javascript (node.js) code
     - index.html
     - script.js
     - styles.css
-#### scripts
+### scripts
 Scripts to start the different services
 - start-mongodb-server.sh
 - start-mongo-express.sh
 - start-web-server.sh
 - start-api-server.sh
+- 
 Scripts to use the API server for adding/removeing/displaying accounts
+
 - people-add.sh <name> <givenName> <birthday>
 - people-remove.sh <name> <givenName> <birthday>
 - people-search.sh <search-pattern>
