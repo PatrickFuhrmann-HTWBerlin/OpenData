@@ -3,7 +3,33 @@
 
 ![The Open Data Design](assets/open-data-design.png)
 
+## Directory Layout
 
+#### services
+The services for which we provide the javascript (node.js) code
+- API
+  - Dockerfile
+  - src
+    - api-server.js
+- WEB
+  - Dockerfile
+  - src
+    - web-server.js
+    - index.html
+    - script.js
+    - styles.css
+#### scripts
+Scripts to start the different services
+- start-mongodb-server.sh
+- start-mongo-express.sh
+- start-web-server.sh
+- start-api-server.sh
+Scripts to use the API server for adding/removeing/displaying accounts
+- people-add.sh <name> <givenName> <birthday>
+- people-remove.sh <name> <givenName> <birthday>
+- people-search.sh <search-pattern>
+- test-api-server.sh
+  
 ## API Server
 ### Environment
 
