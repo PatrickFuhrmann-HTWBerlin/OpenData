@@ -178,8 +178,6 @@ Now the
 
 should show the same results.
 
-```
-
 #### On a remote machine
 
 On a remove machine (your laptop) the process is assentially the same, except that
