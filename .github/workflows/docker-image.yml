@@ -15,4 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file ./services/API/Dockerfile --tag api-server:$(date +%s)
+      run: |
+        cd ./services/API
+        docker build . --tag api-server:$(date +%s)
+        cd ../WEB
+        docker build . --tag web-server:$(date +%s)
