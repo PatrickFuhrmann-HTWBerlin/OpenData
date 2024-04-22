@@ -101,13 +101,24 @@ docker ps
 
 #### On the local machine (where the services are running)
 
-To test the service locally (on the docker hosts) you can try this:
+To test the service locally (on the docker hosts) you can try the scipts in 
+the script directory:
+```
+people-add.sh <name> <givenName> <birthday>
+people-search.sh "name=<name>&..."
+people-remove.sh <name> <givenName> <birthday>
+```
+Before using them you need to set the ENV , so that the script
+finds the service host/ports.
 ```
 #
 # Define host and port of the API server
 #
 export OD_API_HOST=localhost
 export OD_API_PORT=7003
+```
+There is a test for create/display/remove account:
+```
 ./test-api-server.sh
 ```
 
