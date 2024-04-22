@@ -212,5 +212,5 @@ On a remove machine (your laptop) the process is assentially the same, except th
 the hostname 'OD_API_HOST' has to be set to scicat-0X.webhop.net instead.
 
 And you can try to access the webservice with your browser, using the URL
-```
+
 http://scicat-00.webhop.net:7002
