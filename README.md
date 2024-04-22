@@ -34,8 +34,9 @@ OD_CONFIG_SITE_BASEURL | '/'
 
 ## Examples
 
-The following example is using a particular set of 'ports' to the outside. 
+### Fetching and installing the system
 
+The following example is using a particular set of 'ports' to the outside.
 Port | Default Value 
 :------------|:---------------
 Mongo DB Viewer (Expess) | 
@@ -96,6 +97,9 @@ docker ps
 ./start-api-server.sh 
 ./start-web-server.sh
 ```
+### Testing the functionality
+
+#### On the local machine (where the services are running)
 
 To test the service locally (on the docker hosts) you can try this:
 ```
@@ -145,6 +149,28 @@ The output should somehow look like this:
 
 {"acknowledged":true,"deletedCount":0}
 ```
+To test the Web server, you need to change the environment as follows:
 
+```
+export OD_API_PORT=7002       # Web server port
+export OD_API_PREFIX=/forward # use the webserver path through to the API server
+```
 
+Now the 
+```
+./test-api-server.sh
+```
 
+should show the same results.
+
+```
+
+#### On a remote machine
+
+On a remove machine (your laptop) the process is assentially the same, except that
+the hostname 'OD_API_HOST' has to be set to scicat-0X.webhop.net instead.
+
+And you can try to access the webservice with your browser, using the URL
+```
+http://scicat-0X.webhop.net:7002
+```
